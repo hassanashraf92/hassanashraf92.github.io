@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>TikTok authorisation — AI Studio</title>
+<style>
+  :root { color-scheme: light dark; }
+  body { font: 16px/1.6 system-ui, -apple-system, "Segoe UI", sans-serif;
+         max-width: 44rem; margin: 0 auto; padding: 3rem 1.25rem; }
+  h1 { font-size: 1.6rem; margin-bottom: .25rem; }
+  .sub { opacity: .7; margin-top: 0; }
+  nav a { margin-right: 1rem; }
+  footer { margin-top: 3rem; font-size: .875rem; opacity: .7; }
+  #url { width: 100%; box-sizing: border-box; font: 13px/1.5 ui-monospace, SFMono-Regular,
+         Consolas, monospace; padding: .75rem; border: 1px solid currentColor;
+         border-radius: .375rem; background: transparent; color: inherit;
+         min-height: 5.5rem; resize: vertical; }
+  button { font: inherit; padding: .5rem 1rem; border-radius: .375rem;
+           border: 1px solid currentColor; background: transparent; color: inherit;
+           cursor: pointer; }
+  button:disabled { opacity: .6; cursor: default; }
+  .row { display: flex; gap: .75rem; align-items: center; margin-top: .75rem; }
+  .note { font-size: .9375rem; opacity: .8; }
+  .bad { border-left: 3px solid currentColor; padding-left: .875rem; opacity: .9; }
+  [hidden] { display: none !important; }
+</style>
+</head>
+<body>
+  <h1 id="heading">Authorisation complete</h1>
+  <p class="sub" id="lede">Copy the address below and paste it into AI Studio.</p>
+
+  <div id="ok" hidden>
+    <p class="note">
+      AI Studio runs on your own computer, so TikTok cannot send this result to it directly.
+      Copy the full address and paste it into the <strong>Connect TikTok</strong> box in
+      AI Studio to finish linking the account.
+    </p>
+
+    <textarea id="url" readonly spellcheck="false" aria-label="Redirected address"></textarea>
+    <div class="row">
+      <button id="copy" type="button">Copy address</button>
+      <span class="note" id="status" role="status" aria-live="polite"></span>
+    </div>
+
+    <p class="note">
+      Do this within about ten minutes — AI Studio expires a pending connection after that,
+      and you would need to start the authorisation again. Treat this address like a
+      password until you have pasted it; it contains a single-use authorisation code.
+    </p>
+  </div>
+
+  <div id="err" hidden>
+    <p class="bad" id="errmsg"></p>
+    <p class="note">
+      Nothing has been linked. Start the connection again from AI Studio.
+    </p>
+  </div>
+
+  <div id="direct" hidden>
+    <p class="note">
+      This page is the OAuth redirect target for AI Studio, a personal single-user video
+      publishing tool. There is nothing to do here unless you arrived from TikTok's
+      authorisation screen.
+    </p>
+  </div>
+
+  <nav>
+    <a href="./index.html">Home</a>
+    <a href="./terms.html">Terms of Service</a>
+    <a href="./privacy.html">Privacy Policy</a>
+  </nav>
+
+  <footer>
+    Contact: <a href="mailto:hassan92ashraf@gmail.com">hassan92ashraf@gmail.com</a>
+  </footer>
+
+<script>
+(function () {
+  var params = new URLSearchParams(window.location.search);
+  var error = params.get('error');
+  var code = params.get('code');
+  var state = params.get('state');
+
+  var heading = document.getElementById('heading');
+  var lede = document.getElementById('lede');
+
+  if (error) {
+    // TikTok reports a refused or failed authorisation in the query string.
+    heading.textContent = 'Authorisation was not completed';
+    lede.textContent = 'TikTok did not grant access.';
+    document.getElementById('errmsg').textContent =
+      params.get('error_description') || params.get('errCode') || error;
+    document.getElementById('err').hidden = false;
+    return;
+  }
+
+  if (!code || !state) {
+    // Somebody opened the page on its own rather than being redirected here.
+    heading.textContent = 'TikTok authorisation callback';
+    lede.textContent = 'Nothing to copy — this page was not reached from TikTok.';
+    document.getElementById('direct').hidden = false;
+    return;
+  }
+
+  var box = document.getElementById('url');
+  box.value = window.location.href;
+  document.getElementById('ok').hidden = false;
+
+  var status = document.getElementById('status');
+  var button = document.getElementById('copy');
+
+  function select() {
+    box.focus();
+    box.setSelectionRange(0, box.value.length);
+  }
+
+  button.addEventListener('click', function () {
+    select();
+    // Clipboard API needs a secure context; the execCommand path is the fallback
+    // and the selection above means a manual Ctrl+C still works if both fail.
+    var done = function () { status.textContent = 'Copied.'; };
+    var failed = function () { status.textContent = 'Press Ctrl+C to copy the selected text.'; };
+
+    if (navigator.clipboard && window.isSecureContext) {
+      navigator.clipboard.writeText(box.value).then(done, failed);
+    } else if (document.execCommand && document.execCommand('copy')) {
+      done();
+    } else {
+      failed();
+    }
+  });
+
+  select();
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Privacy Policy — AI Studio</title>
+<style>
+  :root { color-scheme: light dark; }
+  body { font: 16px/1.6 system-ui, -apple-system, "Segoe UI", sans-serif;
+         max-width: 44rem; margin: 0 auto; padding: 3rem 1.25rem; }
+  h1 { font-size: 1.6rem; }
+  .updated { opacity: .7; font-size: .9rem; }
+  table { border-collapse: collapse; width: 100%; margin: 1rem 0; }
+  th, td { text-align: left; padding: .5rem .6rem; border-bottom: 1px solid rgba(128,128,128,.35); vertical-align: top; }
+  code { font-size: .95em; }
+  footer { margin-top: 3rem; font-size: .875rem; opacity: .7; }
+</style>
+</head>
+<body>
+  <h1>Privacy Policy</h1>
+  <p class="updated">Last updated: 3 August 2026</p>
+
+  <h2>Summary</h2>
+  <p>
+    AI Studio ("the App") is a private, single-user application run by Hassan Ashraf on
+    personal hardware. It has no other users, no server, and no analytics. It stores data
+    only on that machine. No data is sold, shared, or transferred to any third party.
+  </p>
+
+  <h2>What the App accesses</h2>
+  <table>
+    <tr><th>Data</th><th>Why</th><th>Where it is kept</th></tr>
+    <tr>
+      <td>TikTok account identifier (<code>open_id</code>), display name and avatar URL<br>
+          (scope <code>user.info.basic</code>)</td>
+      <td>To show which account is connected and to attach uploads to the right account.</td>
+      <td>Local database on my computer.</td>
+    </tr>
+    <tr>
+      <td>OAuth access token and refresh token</td>
+      <td>To upload videos on my behalf without re-authorising each time.</td>
+      <td>Local database, encrypted at rest. Never transmitted anywhere except to TikTok's own API endpoints.</td>
+    </tr>
+    <tr>
+      <td>Video files, captions and upload status<br>
+          (scopes <code>video.upload</code>, <code>video.publish</code>)</td>
+      <td>To send videos I created to my own TikTok drafts or profile, and to report whether the upload succeeded.</td>
+      <td>Local disk and local database.</td>
+    </tr>
+  </table>
+
+  <h2>What the App does not do</h2>
+  <ul>
+    <li>It does not read, collect, or store data about any other TikTok user.</li>
+    <li>It does not sell, rent, or share any data with third parties.</li>
+    <li>It does not use advertising, tracking, or analytics services.</li>
+    <li>It does not send data to any server operated by me — there is no backend beyond my own computer.</li>
+    <li>It does not use TikTok data to train machine-learning models.</li>
+  </ul>
+
+  <h2>Third parties</h2>
+  <p>
+    Data travels only between my computer and the official APIs of the platforms I connect
+    (TikTok, YouTube). Their handling of that data is governed by their own policies, including the
+    <a href="https://www.tiktok.com/legal/page/row/privacy-policy/en">TikTok Privacy Policy</a>.
+  </p>
+
+  <h2>Retention and deletion</h2>
+  <p>
+    Tokens and profile details are kept only while the account is connected. Disconnecting
+    the account in the App deletes its stored tokens and revokes them with TikTok. Access can
+    also be revoked at any time from TikTok's own settings
+    (Profile → Settings and privacy → Security → Manage app permissions). Deleting the App's
+    local database removes all stored data permanently.
+  </p>
+
+  <h2>Children</h2>
+  <p>The App is not directed at children and collects no data from anyone other than its single operator.</p>
+
+  <h2>Changes</h2>
+  <p>Updates to this policy are reflected in the date at the top of this page.</p>
+
+  <footer>
+    Contact: <a href="mailto:hassan92ashraf@gmail.com">hassan92ashraf@gmail.com</a> ·
+    <a href="./index.html">Home</a> · <a href="./terms.html">Terms of Service</a>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI Studio — a personal video publishing tool</title>
+<style>
+  :root { color-scheme: light dark; }
+  body { font: 16px/1.6 system-ui, -apple-system, "Segoe UI", sans-serif;
+         max-width: 44rem; margin: 0 auto; padding: 3rem 1.25rem; }
+  h1 { font-size: 1.6rem; margin-bottom: .25rem; }
+  .sub { opacity: .7; margin-top: 0; }
+  nav a { margin-right: 1rem; }
+  footer { margin-top: 3rem; font-size: .875rem; opacity: .7; }
+</style>
+</head>
+<body>
+  <h1>AI Studio</h1>
+  <p class="sub">A personal tool for editing and publishing my own videos.</p>
+
+  <p>
+    AI Studio is a private, single-user application I run on my own computer. It helps me
+    script, edit and caption videos for my own channels, and then upload those videos to
+    my own accounts on YouTube and TikTok.
+  </p>
+
+  <p>
+    It is not a public service. There are no other users, no sign-up, and no hosted
+    version. It connects to TikTok only through TikTok's official Login Kit and Content
+    Posting API, and only to the single TikTok account that I personally authorise.
+  </p>
+
+  <h2>What it does with TikTok</h2>
+  <ul>
+    <li>Reads my basic profile info (<code>user.info.basic</code>) so it can show which account is connected.</li>
+    <li>Uploads a video I created to my TikTok drafts (<code>video.upload</code>), where I finish and post it in the TikTok app.</li>
+    <li>Posts a video I created directly to my own profile (<code>video.publish</code>) when I choose that option.</li>
+  </ul>
+
+  <nav>
+    <a href="./terms.html">Terms of Service</a>
+    <a href="./privacy.html">Privacy Policy</a>
+  </nav>
+
+  <footer>
+    Contact: <a href="mailto:hassan92ashraf@gmail.com">hassan92ashraf@gmail.com</a>
+  </footer>
+</body>
+</html>

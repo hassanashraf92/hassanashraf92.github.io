@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Page not found</title>
+<!--
+  The site-wide 404 for hassanashraf92.github.io, and the share link's landing page
+  (ADR-048, ADR-070, UX §8, docs/03 §15).
+
+  **Why 404.html and not d/index.html.** GitHub Pages serves static files and has no rewrite
+  rules, and `/d/<n>` is one path per day forever — none of which can be generated ahead of a
+  day that has not happened. GitHub Pages serves this file for every path it cannot find, so
+  one file answers every day number. The HTTP status really is 404; browsers render the body
+  and run the script regardless, which is the whole trick.
+
+  **This domain is shared, which is why the page is neutral until it is not.** The root is
+  AI Studio, a separate product whose pages TikTok reviews for API access. A 404 branded as a
+  game would be shown to anyone who mistypes any URL here, reviewers included. So the default
+  state is an ordinary not-found page in the site's own voice, and only a path matching
+  `/d/<n>` turns it into Fulcrum's hand-off.
+
+  It lives in Fulcrum's repository rather than this site's because it encodes two things that
+  app defines and a static site does not: `Branding.urlScheme` and `DailyLink`'s `/d/<n>`
+  shape. CI gate 7 checks the scheme here against the Swift value, for the reason it checks
+  the other duplicated identifiers — drift fails silently on a device and nowhere else.
+-->
+<style>
+  :root { color-scheme: light dark; }
+  body { font: 16px/1.6 system-ui, -apple-system, "Segoe UI", sans-serif;
+         max-width: 44rem; margin: 0 auto; padding: 3rem 1.25rem; }
+  h1 { font-size: 1.6rem; margin-bottom: .25rem; }
+  .sub { opacity: .7; margin-top: 0; }
+  nav a { margin-right: 1rem; }
+  footer { margin-top: 3rem; font-size: .875rem; opacity: .7; }
+  .day { font-variant-numeric: tabular-nums; }
+  [hidden] { display: none !important; }
+</style>
+</head>
+<body>
+  <div id="notfound">
+    <h1>Page not found</h1>
+    <p class="sub">There is nothing at this address.</p>
+    <nav>
+      <a href="/">Home</a>
+      <a href="/terms.html">Terms of Service</a>
+      <a href="/privacy.html">Privacy Policy</a>
+    </nav>
+  </div>
+
+  <div id="daily" hidden>
+    <h1>Fulcrum</h1>
+    <p class="sub">One straight cut. Get as close to half as you can.</p>
+    <p id="message"></p>
+    <nav>
+      <a href="https://hassanashraf92.github.io/fulcrum-legal/">Privacy Policy</a>
+      <a href="https://hassanashraf92.github.io/fulcrum-legal/terms.html">Terms of Use</a>
+    </nav>
+  </div>
+
+  <footer>
+    Contact: <a href="mailto:hassan92ashraf@gmail.com">hassan92ashraf@gmail.com</a>
+  </footer>
+
+<script>
+  // The one place this file knows what the app is called on a device. Kept as its own
+  // constant because CI gate 7 reads it and compares it with `Branding.current.urlScheme`.
+  var SCHEME = "fulcrum";
+
+  var match = location.pathname.match(/^\/d\/(\d+)\/?$/);
+  if (match) {
+    var day = parseInt(match[1], 10);
+    document.getElementById("notfound").hidden = true;
+    document.getElementById("daily").hidden = false;
+    document.title = "Fulcrum · Daily #" + day;
+    document.getElementById("message").innerHTML =
+      'Opening <span class="day">Daily #' + day + '</span>…';
+    // FR-036 is enforced in the app, not here: a link to a future day opens nothing, and
+    // this page has no idea what day it is on the reader's device. All it does is hand the
+    // number over. An uninstalled app simply fails to open the scheme and the sentence below
+    // replaces the one above, which is why the fallback is a sentence rather than an error.
+    window.location.replace(SCHEME + "://d/" + day);
+    setTimeout(function () {
+      document.getElementById("message").textContent =
+        "Daily #" + day + " is waiting in Fulcrum. Install the app to play it.";
+    }, 1500);
+  }
+</script>
+</body>
+</html>

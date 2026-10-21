@@ -18,7 +18,7 @@
 </head>
 <body>
   <h1>Privacy Policy</h1>
-  <p class="updated">Last updated: 3 August 2026</p>
+  <p class="updated">Last updated: 21 October 2026</p>
 
   <h2>Summary</h2>
   <p>
@@ -49,9 +49,51 @@
     </tr>
   </table>
 
+  <h3>Facebook and Instagram (Meta)</h3>
+  <table>
+    <tr><th>Data</th><th>Why</th><th>Where it is kept</th></tr>
+    <tr>
+      <td>My Facebook user id and name, the Pages I administer, and the Instagram business account
+          linked to each Page: id, name, username and profile picture<br>
+          (scopes <code>pages_show_list</code>, <code>instagram_basic</code>)</td>
+      <td>To show which Page and Instagram account are connected and to publish to the right one.</td>
+      <td>Local database on my computer.</td>
+    </tr>
+    <tr>
+      <td>Facebook user and Page access tokens</td>
+      <td>To publish and read on my behalf without re-authorising each time.</td>
+      <td>Local database, encrypted at rest. Never transmitted anywhere except to Meta's own API endpoints.</td>
+    </tr>
+    <tr>
+      <td>Video files and captions, and their publishing status<br>
+          (scopes <code>pages_manage_posts</code>, <code>pages_read_engagement</code>,
+          <code>instagram_content_publish</code>)</td>
+      <td>To publish videos I created to my own Facebook Page and Instagram account, and to report whether
+          publishing succeeded.</td>
+      <td>Local disk and local database.</td>
+    </tr>
+    <tr>
+      <td>Performance numbers for my own Page, posts and Instagram account: views, watch time,
+          reactions, followers<br>
+          (scopes <code>read_insights</code>, <code>instagram_manage_insights</code>)</td>
+      <td>To see how my own videos performed.</td>
+      <td>Local database.</td>
+    </tr>
+    <tr>
+      <td>Comments other people leave on my own posts: the comment text, its time, and the commenter's
+          name or username where Meta provides it<br>
+          (scopes <code>pages_read_user_content</code>, <code>pages_manage_engagement</code>,
+          <code>instagram_manage_comments</code>)</td>
+      <td>To read and reply to comments on my posts, and to hide abusive ones.</td>
+      <td>Local database.</td>
+    </tr>
+  </table>
+
   <h2>What the App does not do</h2>
   <ul>
     <li>It does not read, collect, or store data about any other TikTok user.</li>
+    <li>On Facebook and Instagram, the only data about other people it reads is the comments they leave
+        on my own posts, as described above. It does not read anyone's profile, friends, or activity.</li>
     <li>It does not sell, rent, or share any data with third parties.</li>
     <li>It does not use advertising, tracking, or analytics services.</li>
     <li>It does not send data to any server operated by me — there is no backend beyond my own computer.</li>
@@ -61,17 +103,26 @@
   <h2>Third parties</h2>
   <p>
     Data travels only between my computer and the official APIs of the platforms I connect
-    (TikTok, YouTube). Their handling of that data is governed by their own policies, including the
-    <a href="https://www.tiktok.com/legal/page/row/privacy-policy/en">TikTok Privacy Policy</a>.
+    (TikTok, YouTube, Facebook, Instagram). Their handling of that data is governed by their own
+    policies, including the
+    <a href="https://www.tiktok.com/legal/page/row/privacy-policy/en">TikTok Privacy Policy</a> and the
+    <a href="https://www.facebook.com/privacy/policy/">Meta Privacy Policy</a>.
   </p>
 
-  <h2>Retention and deletion</h2>
+  <h2 id="deletion">Retention and deletion</h2>
   <p>
     Tokens and profile details are kept only while the account is connected. Disconnecting
     the account in the App deletes its stored tokens and revokes them with TikTok. Access can
     also be revoked at any time from TikTok's own settings
     (Profile → Settings and privacy → Security → Manage app permissions). Deleting the App's
     local database removes all stored data permanently.
+  </p>
+  <p>
+    For Facebook and Instagram, disconnecting an account in the App deletes its stored tokens; the
+    grant is revoked with Meta once no other connected account relies on it. Access can also be removed
+    at any time from Facebook (Settings &amp; privacy → Settings → Apps and websites → Remove). To have
+    any data the App stored about you deleted — for example a comment you left on one of my posts —
+    email the address below and it will be deleted from the local database within 30 days.
   </p>
 
   <h2>Children</h2>
